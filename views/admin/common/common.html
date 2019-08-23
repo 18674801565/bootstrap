@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后�?-->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>Dashboard Template for Bootstrap</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../../static/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="../../static/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../../static/css/dashboard.css" rel="stylesheet">
+  <link href="../../static/common/common.css" rel="stylesheet">
+
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <script src="../../static/assets/js/ie-emulation-modes-warning.js"></script>
+  <script src="../../static/common/template-web.js"></script>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+              aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">控制台</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-home"></span></span></a></li>
+        <li><a href="/admin/leave"><span class="glyphicon glyphicon glyphicon-share"></span></span></a></li>
+
+      </ul>
+      <form class="navbar-form navbar-right">
+        <input type="text" class="form-control" placeholder="Search...">
+      </form>
+    </div>
+  </div>
+</nav>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-3 col-md-2 sidebar">
+        <div class="side_top">
+          <img src="../static/img/logo.png" alt="..." class="img-circle">
+          <span class="side_username"><%= $data.user.user_name %></span>
+        </div>
+        <span class="side_menus">MENUS</span>
+
+        <ul class="nav nav-sidebar leftside_bar">
+          <%
+          for(let m of $data.menus){
+          %>
+          <li><a href="javascript:void(0)" title="<%=m.menu_href%>" class="side_visited">
+            <span class="glyphicon <%=m.icon%>"></span><%=m.desc%><span class="glyphicon glyphicon-menu-down"></span></a>
+            <ul class="nav nav-sidebar side_visited_ul" style="display: none">
+              <%
+              for(let mm of m.sonMenu){
+              %>
+              <li><a class="side_visited_two" href="javascript:void(0)" title="<%=mm.menu_href%>"><%=mm.desc%></a></li>
+              <%
+              }
+              %>
+            </ul>
+          </li>
+          <%
+          }
+          %>
+
+        </ul>
+      </div>
+
+      <div id="res_body" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h1 class="page-header">功能</h1>
+
+        <div class="row placeholders">
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
+              height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+            <h4>Label</h4>
+            <span class="text-muted">Something else</span>
+          </div>
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
+              height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+            <h4>Label</h4>
+            <span class="text-muted">Something else</span>
+          </div>
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
+              height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+            <h4>Label</h4>
+            <span class="text-muted">Something else</span>
+          </div>
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
+              height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+            <h4>Label</h4>
+            <span class="text-muted">Something else</span>
+          </div>
+        </div>
+
+        <h2 class="sub-header">Section title</h2>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Header</th>
+                <th>Header</th>
+                <th>Header</th>
+                <th>Header</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1,001</td>
+                <td>Lorem</td>
+                <td>ipsum</td>
+                <td>dolor</td>
+                <td>sit</td>
+              </tr>
+              <tr>
+                <td>1,002</td>
+                <td>amet</td>
+                <td>consectetur</td>
+                <td>adipiscing</td>
+                <td>elit</td>
+              </tr>
+              <tr>
+                <td>1,003</td>
+                <td>Integer</td>
+                <td>nec</td>
+                <td>odio</td>
+                <td>Praesent</td>
+              </tr>
+              <tr>
+                <td>1,003</td>
+                <td>libero</td>
+                <td>Sed</td>
+                <td>cursus</td>
+                <td>ante</td>
+              </tr>
+              <tr>
+                <td>1,004</td>
+                <td>dapibus</td>
+                <td>diam</td>
+                <td>Sed</td>
+                <td>nisi</td>
+              </tr>
+              <tr>
+                <td>1,005</td>
+                <td>Nulla</td>
+                <td>quis</td>
+                <td>sem</td>
+                <td>at</td>
+              </tr>
+
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+  </script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+  <script src="../../static/assets/js/vendor/holder.min.js"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="../../static/assets/js/ie10-viewport-bug-workaround.js"></script>
+  <script src="../../static/common/common.js"> </script>
+<!--提示框插件-->
+<script src="../../static/common/toastr.min.js"></script>
+<link href="../../static/common/toastr.min.css" rel="stylesheet" />
+<script>
+
+  //更新密码
+    function updatePsw(){
+        $("#update_psw").click(function(){
+            //判断输入框是否为空，并提示
+            let input = $(".form-group input")
+
+            let null1 = $(input[0]).val()!=undefined && $(input[0]).val()!=null&&$(input[0]).val()!="";
+            let null2 = $(input[1]).val()!=undefined && $(input[1]).val()!=null&&$(input[1]).val()!="";
+            let null3 = $(input[2]).val()!=undefined && $(input[2]).val()!=null&&$(input[2]).val()!="";
+            let null4 = $(input[3]).val()!=undefined && $(input[3]).val()!=null&&$(input[3]).val()!="";
+            if(null1&&null2&&null3&&null4){
+
+            }else{
+                toastr.error("请填写完整！");
+                return false;
+            }
+
+            //判断新密码与旧密码是否相等
+            let surePassword =  $("#surePassword").val().trim()
+            let newPassword = $("#newPassword").val().trim()
+            if(surePassword!==newPassword){
+                toastr.error("确认密码不一致！")
+                return false
+            }
+            //判断用户，密码是否正确
+            let usernameHide= $("#usernameHide").val().trim()
+            let userName = $("#userName").val().trim()
+            if(usernameHide!=userName){
+                toastr.error("账号不正确！")
+                return false
+            }
+            if($("#passwordHide").val().trim()!=$("#password").val().trim()){
+                toastr.error("账号不正确！")
+                return false
+            }
+
+            $.post({
+                url:"/admin/updatePsw",
+                dataType:"json",
+                async:false,
+                data:{
+                    userId: $("#userId").val(),
+                    newPassword :newPassword
+                },
+                success:function(data){
+                    toastr.success(data.msg,"3秒后跳转到登录页");
+                    //跳转期间，页面不可操作
+                    $("body").css("pointer-events","none")
+
+                    setTimeout(function () {
+                        location.href = "/admin/login"
+                    },3000)
+                },
+                error:function(){
+                    toastr.info(data.msg)
+                }
+            })
+            return false
+        })
+    }
+
+$(function(){
+    //浏览器回退后。强制刷新
+    if (window.name == "hasLoad") {
+        location.reload();
+        window.name = "";
+    } else {
+        window.name = "hasLoad";
+    }
+    //初始化弹框对象
+    toastr.options = {
+        "closeButton": false, //是否显示关闭按钮
+        "debug": false, //是否使用debug模式
+        "positionClass": "toast-center",//弹出窗的位置
+        "showDuration": "100",//显示的动画时间
+        "hideDuration": "1000",//消失的动画时间
+        "timeOut": "3000", //展现时间
+        "extendedTimeOut": "1000",//加长展示时间
+        "showEasing": "swing",//显示时的动画缓冲方式
+        "hideEasing": "linear",//消失时的动画缓冲方式
+        "showMethod": "fadeIn",//显示时的动画方式
+        "hideMethod": "fadeOut" //消失时的动画方式
+    };
+    //侧栏点击请求数据，并显示
+    $(".side_visited,.side_visited_two").click(function(){
+        //等到请求地址
+        let req_href = $(this).attr("title");
+        if(req_href==''||req_href=="null"||req_href==undefined){
+
+           return false
+        }
+        //请求
+        $.post({
+            url:req_href,
+            dataType:'text',
+            async:false,
+            success:function(data){
+                $("#res_body").empty()
+                $("#res_body").append(data)
+                updatePsw()
+            },
+            error:function(){
+
+            }
+        })
+    })
+
+
+
+})
+
+</script>
+</body>
+
+</html>

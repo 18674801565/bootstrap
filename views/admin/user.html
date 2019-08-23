@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后�?-->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../static/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../static/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../../static/css/dashboard.css" rel="stylesheet">
+    <link href="../../static/common/common.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../static/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        /* 导航 */
+        .navbar-inverse {
+            background-color: #348fde;
+        }
+
+        .navbar-inverse a {
+            color: white !important;
+        }
+
+        .navbar-header:hover {
+            background-color: #367FA9;
+        }
+
+        .navbar>.container-fluid .navbar-brand {
+            margin-left: 0px;
+
+        }
+
+        /* 侧栏 */
+        .side_top {
+            height: 64px;
+            width: 320px;
+            margin-left: -20px;
+            line-height: 64px;
+            background-color: #1A2226;
+            padding-left: 10px;
+            margin-bottom: 2px;
+        }
+
+        .side_top .img-circle {
+            height: 64px;
+            width: 84px;
+        }
+
+        .side_top>.side_username {
+            height: 40px;
+            line-height: 40px;
+            color: white;
+        }
+
+        .side_menus {
+            display: block;
+            width: 320px;
+            margin-left: -20px;
+            height: 40px;
+            line-height: 40px;
+            background-color: #1A2226;
+            color: white;
+            padding-left: 20px;
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        .nav-sidebar>li>a:hover {
+            text-decoration: none;
+            background-color: #1A2226;
+        }
+
+        .sidebar a {
+            color: white;
+        }
+
+        .active {
+            padding-top: 0px;
+            border-left: 2px solid #0285f7;
+        }
+
+        .sidebar span {
+            margin-right: 10px;
+        }
+
+        .side_visited_ul {
+            margin-left: 0px;
+
+        }
+
+        .side_visited_ul li a {
+            padding-left: 30px;
+        }
+
+        .glyphicon-menu-down,
+        .glyphicon-menu-up {
+            float: right;
+        }
+
+
+
+
+        /* 表单 */
+        .td_handle {
+            border-left: 1px solid #CCC !important;
+        }
+        .paging{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<%include("./common/side")%>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <%include("./common/side")%>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h1 class="page-header">功能</h1>
+
+                <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
+              
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+    </script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../../static/assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../static/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script>
+        $(function () {
+            $(".side_visited").click(function () {
+                $(this).children("ul").toggle();
+                return false;
+            })
+
+            //侧栏选中样式
+            $(".leftside_bar > li").click(function () {
+                $(this).addClass("active").siblings().removeClass("active");
+                //侧栏右侧图标
+                let side_span = $(this).children("a").children("span");
+                if (side_span.length == 2) {
+                    side_span.last().toggleClass(
+                        "glyphicon-menu-up",
+                        "glyphicon-menu-down"
+                    )
+                }
+
+                //取消默认方法
+                return false;
+            })
+
+
+
+        })
+    </script>
+     <!-- Graphs -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+     <script>
+       var ctx = document.getElementById("myChart");
+       var myChart = new Chart(ctx, {
+         type: 'line',
+         data: {
+           labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+           datasets: [{
+             data: [111111, 11345, 18483, 24003, 23489, 24092, 12034],
+             lineTension: 0,
+             backgroundColor: 'transparent',
+             borderColor: '#007bff',
+             borderWidth: 4,
+             pointBackgroundColor: '#007bff'
+           }]
+         },
+         options: {
+           scales: {
+             yAxes: [{
+               ticks: {
+                 beginAtZero: false
+               }
+             }]
+           },
+           legend: {
+             display: false,
+           }
+         }
+       });
+     </script>
+</body>
+
+</html>

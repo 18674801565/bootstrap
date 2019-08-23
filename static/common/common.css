@@ -1,0 +1,97 @@
+/* 导航 */
+.navbar-inverse {
+    background-color: #348fde;
+    padding-right: 30px;
+}
+
+.navbar-inverse a {
+    color: white !important;
+}
+
+.navbar-header:hover {
+    background-color: #367FA9;
+}
+
+.navbar>.container-fluid .navbar-brand {
+    margin-left: 0px;
+
+}
+.navbar-nav>li>a:hover{
+    background-color: white !important;
+}
+.navbar-nav>li>a:hover span{
+    color: #348fde;
+}
+@media (min-width: 768px) {
+    .navbar-nav > li > a {
+        padding: 0px 20px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+/* 侧栏 */
+.side_top{
+    height: 64px;
+    width: 140%;
+    margin-left: -20px;
+    line-height: 64px;
+    background-color: #1A2226;
+    padding-left: 10px;
+    margin-bottom: 2px;
+}
+.side_top .img-circle{
+    height: 64px;
+    width: 84px;
+}
+.side_top > .side_username{
+    height: 40px;
+    line-height: 40px;
+    color: white;
+}
+.side_menus{
+    display: block;
+    width: 140%;
+    margin-left: -20px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #1A2226;
+    color: white;
+    padding-left: 20px;
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+.nav-sidebar>li>a:hover {
+    text-decoration: none;
+    background-color: #1A2226;
+}
+
+.sidebar a {
+    color: white;
+}
+.active{
+    padding-top: 0px;
+    border-left: 2px solid #0285f7;
+}
+.sidebar span {
+    margin-right: 10px;
+}
+
+.side_visited_ul {
+    margin-left: 0px;
+
+}
+
+.side_visited_ul li a {
+    padding-left: 30px;
+}
+.glyphicon-menu-down,
+.glyphicon-menu-up {
+    float: right;
+}
+/* 表单 */
+.td_handle {
+    border-left: 1px solid #CCC !important;
+}
+.paging{
+    text-align: center;
+}

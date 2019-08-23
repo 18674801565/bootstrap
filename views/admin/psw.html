@@ -1,0 +1,24 @@
+
+                <h1 class="page-header">功能</h1>
+                <form>
+                        <div class="form-group">
+                          <label for="userName">用户名</label>
+                          <input type="text" class="form-control" id="userName" value="<%= $data.user.user_name%>" placeholder="<%= $data.user.user_name%>">
+                        </div>
+                        <div class="form-group">
+                        <label for="password">旧密码</label>
+                        <input type="password" class="form-control" id="password" value="<%= $data.user.password%>" placeholder="<%= $data.user.password%>">
+                       </div>
+                        <div class="form-group">
+                          <label for="newPassword">新密码</label>
+                          <input type="password" name="newPassword" class="form-control" id="newPassword" placeholder="新密码">
+                        </div>
+                        <div class="form-group">
+                                <label for="surePassword">确认密码</label>
+                                <input type="password" name="surePassword" class="form-control" id="surePassword" placeholder="确认密码">
+                        </div>
+                        <input type="hidden" value="<%= $data.user.id%>" id="userId">
+                        <input type="hidden" value="<%= $data.user.user_name%>" id="usernameHide">
+                        <input type="hidden" value="<%= $data.user.password%>" id="passwordHide">
+                       <button id="update_psw" type="button" class="btn btn-info">提交</button>
+                      </form>

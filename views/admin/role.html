@@ -1,0 +1,295 @@
+
+                <h1 class="page-header">功能</h1>
+
+                <a class="btn btn-info" style="margin-bottom: 10px"
+                   data-toggle="modal" data-target="#myModal" onclick="addRole()">添加角色</a>
+                <h2 class="sub-header">列表</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>编号</th>
+                                <th>角色</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% for(let r of $data.role){
+                        %>
+                        <tr>
+                            <td><%= r.id%></td>
+                            <td><%= r.role%></td>
+                            <td><%= r.state==1?"可用":"不可用"%></td>
+                            <td class="td_handle">
+                                <a class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="alterRole('<%= r%>')">修改</a>
+                                <a class="btn btn-info" data-toggle="modal" data-target="#myModal"  onclick="deleteRole('<%= r%>')">删除</a>
+                            </td>
+                        </tr>
+                        <%
+                        }
+                        %>
+
+                        </tbody>
+                        
+                    </table>
+                    <nav aria-label="Page navigation" class="paging">
+                        <ul class="pagination">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- 模态框（Modal） -->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close sureClose" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+
+                                </h4>
+                            </div>
+                            <div class="modal-body" style="height: 150px;">
+                                <form>
+                                    <input type="hidden" id="roleId" value="">
+                                <div class="form-group" style="height: 50px">
+                                    <label for="roleName" class="col-sm-2 control-label" style="height: 34px;
+                                                                                                display: inline-block;
+                                                                                                line-height: 34px;">
+                                        角色</label>
+                                    <div class="col-sm-10">
+                                        <input  type="text" class="form-control" id="roleName" placeholder="请输入角色">
+                                    </div>
+                                </div>
+                                    <div class="form-group" style="height: 50px" >
+                                        <label for="stateName" class="col-sm-2 control-label" style="height: 34px;
+                                                                                                    display: inline-block;
+                                                                                                    line-height: 34px;
+                                                                                                    margin-top: 10px">
+                                            状态</label>
+                                        <div class="col-sm-10">
+                                          <select id="stateName"
+                                                        style="
+                                                        display: block;
+                                                        width: 100%;
+                                                        height: 34px;
+                                                        padding: 6px 12px;
+                                                        font-size: 14px;
+                                                        line-height: 1.42857143;
+                                                        color: #555;
+                                                        background-color: #fff;
+                                                        background-image: none;
+                                                        border: 1px solid #ccc;
+                                                        border-radius: 4px;
+                                                        margin-top: 10px">
+                                              <option style="color: #555;" value="2">不可用</option>
+                                              <option style="color: #555;" value="1">可用</option>
+                                              <option style="color: #555;" value="0">删除</option>
+                                          </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default sureClose" data-dismiss="modal">关闭
+                                </button>
+                                <button type="button" id="sure_alter" class="btn btn-primary">
+                                    确定
+                                </button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+                <script>
+                    //显示当前修改的角色
+                    function alterRole(role){
+                        $("#myModalLabel").text("修改")
+                        $(".modal-body").css('display','block')
+                        let role_obj = JSON.parse(role);
+                        $("#roleId").val(role_obj.id)
+                        $("#roleName").val(role_obj.role)
+                        $("#stateName").val(role_obj.state)
+
+
+                        $("#sure_alter").unbind('click').click(function(){
+                            if(isRoleNull()){
+                            let roleId = $("#roleId").val()
+                            let roleName =$("#roleName").val()
+                            let stateName = $("#stateName").val()
+
+                            $.post({
+                                url:'/admin/alterRole',
+                                dataType:'json',
+                                async:false,
+                                data:{
+                                    roleId: roleId,
+                                    roleName:roleName,
+                                    stateName:stateName
+                                },
+                                success:function(data){
+                                    $('#myModal').css('display', 'none')
+                                    $('.modal-backdrop').css('display', 'none')
+                                    //刷新列表
+                                    $.post({
+                                        url:'/admin/role',
+                                        dataType:'text',
+                                        async:false,
+                                        success:function(data){
+                                            $("#res_body").empty()
+                                            $("#res_body").append(data)
+                                        },
+                                        error:function(){
+
+                                        }
+                                    })
+
+                                    toastr.success(data.msg);
+                                },
+                                error:function(data){
+                                    $('#myModal').css('display', 'none')
+                                    $('.modal-backdrop').css('display', 'none')
+                                    toastr.error(data.msg);
+
+                                }
+                            })
+
+                        }else{
+                            toastr.info('请填写完整！');
+                        }
+                        })
+                        return false
+                    }
+                    //删除当前角色
+                    function deleteRole(role){
+                        $("#myModalLabel").text("删除")
+                        $(".modal-body").css('display','none')
+                        let role_obj = JSON.parse(role);
+                        let roleId = role_obj.id;
+
+
+                        $("#sure_alter").unbind('click').click(function() {
+
+                            $.post({
+                                url: '/admin/deleteRole',
+                                dataType: 'json',
+                                async: false,
+                                data: {
+                                    roleId: roleId,
+                                },
+                                success: function (data) {
+                                    $('#myModal').css('display', 'none')
+                                    $('.modal-backdrop').css('display', 'none')
+                                    //刷新列表
+                                    $.post({
+                                        url: '/admin/role',
+                                        dataType: 'text',
+                                        async: false,
+                                        success: function (data) {
+                                            $("#res_body").empty()
+                                            $("#res_body").append(data)
+                                            return false
+                                        },
+                                        error: function () {
+
+                                        }
+                                    })
+
+                                    toastr.success(data.msg);
+                                },
+                                error: function (data) {
+                                    $('#myModal').css('display', 'none')
+                                    $('.modal-backdrop').css('display', 'none')
+
+                                }
+                            })
+                            return false
+
+                        })
+                        return false
+                    }
+                    //添加角色
+                    function addRole(){
+                        $("#myModalLabel").text("添加")
+                        $(".modal-body").css('display','block')
+
+
+                        $("#sure_alter").unbind('click').click(function(){
+                            if(isRoleNull()){
+
+                            let roleName =$("#roleName").val()
+                            let stateName = $("#stateName").val()
+
+                            $.post({
+                                url:'/admin/addRole',
+                                dataType:'json',
+                                async:false,
+                                data:{
+
+                                    roleName:roleName,
+                                    stateName:stateName
+                                },
+                                success:function(data){
+                                    $('#myModal').css('display', 'none')
+                                    $('.modal-backdrop').css('display', 'none')
+                                    //刷新列表
+                                    $.post({
+                                        url:'/admin/role',
+                                        dataType:'text',
+                                        async:false,
+                                        success:function(data){
+                                            $("#res_body").empty()
+                                            $("#res_body").append(data)
+                                        },
+                                        error:function(){
+
+                                        }
+                                    })
+
+                                    toastr.success(data.msg);
+                                },
+                                error:function(data){
+                                    $('#myModal').css('display', 'none')
+                                    $('.modal-backdrop').css('display', 'none')
+                                    toastr.error(data.msg);
+
+                                }
+                            })
+
+                        }else{
+                            toastr.info('请填写完整！');
+                        }
+                        })
+                        return false
+                    }
+                     //判断填写资料是否为空
+                    function isRoleNull(){
+
+                       let role = $("#roleName").val()
+                       let state = $("#stateName").val()
+
+                        if(role==null||role==''||role==undefined){
+                            return false
+                        }
+                        if(state==null||state==''||state==undefined){
+                            return false
+                        }
+                        return true
+                    }
+                </script>
