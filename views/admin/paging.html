@@ -1,0 +1,48 @@
+<table class="table table-striped" id="table-striped">
+    <thead>
+    <tr>
+        <th>编号</th>
+        <th>用户名</th>
+        <th>密码</th>
+        <th>身份</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(let u of $data.users){
+    %>
+    <tr>
+        <td><%= u.id%></td>
+        <td><%= u.user_name%></td>
+        <td><%= u.password %></td>
+        <%
+        if(u.role_id==1){
+        %>
+        <td>用户</td>
+        <%
+
+        }else if(u.role_id==2){
+        %>
+        <td>管理员</td>
+        <%
+        }else{
+        %>
+        <td>未知</td>
+        <%
+        }
+        %>
+
+        <td><%= u.state==1 ?'可用':'不可用' %></td>
+        <td class="td_handle">
+            <a class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="alterUser('<%= u%>')">修改</a>
+            <a class="btn btn-info" data-toggle="modal" data-target="#myModal" onclick="deleteUser('<%= u%>')">删除</a>
+        </td>
+    </tr>
+    <%
+    }
+    %>
+
+    </tbody>
+
+</table>

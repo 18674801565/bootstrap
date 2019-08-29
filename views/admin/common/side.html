@@ -7,18 +7,19 @@
 
     <ul class="nav nav-sidebar leftside_bar">
         <%
-         for(let m of $data.menus){
+        for(let m of $data.menus){
         %>
         <li><a href="<%=m.menu_href%>" class="side_visited">
-            <span class="glyphicon <%=m.icon%>"></span><%=m.desc%><span class="glyphicon glyphicon-menu-down"></span></a>
+            <span class="glyphicon <%=m.icon%>"></span><%=m.desc%><span
+                class="glyphicon glyphicon-menu-down"></span></a>
             <ul class="nav nav-sidebar side_visited_ul" style="display: none">
-            <%
-            for(let mm of m.sonMenu){
-            %>
+                <%
+                for(let mm of m.sonMenu){
+                %>
                 <li><a href="<%=mm.menu_href%>"><%=mm.desc%></a></li>
-            <%
-            }
-            %>
+                <%
+                }
+                %>
             </ul>
         </li>
         <%
@@ -26,32 +27,31 @@
         %>
 
 
-
         <!--<li class="side_visited"><a href=""> <span class="glyphicon glyphicon-expand"></span>视屏管理<span-->
-                <!--class="glyphicon glyphicon-menu-down"></span></a>-->
-            <!--<ul class="nav nav-sidebar side_visited_ul" style="display: none">-->
-                <!--<li><a href="">添加视屏</a></li>-->
-                <!--<li><a href="">删除视屏</a></li>-->
-                <!--<li><a href="">修改视屏信息</a></li>-->
+        <!--class="glyphicon glyphicon-menu-down"></span></a>-->
+        <!--<ul class="nav nav-sidebar side_visited_ul" style="display: none">-->
+        <!--<li><a href="">添加视屏</a></li>-->
+        <!--<li><a href="">删除视屏</a></li>-->
+        <!--<li><a href="">修改视屏信息</a></li>-->
 
-            <!--</ul>-->
+        <!--</ul>-->
         <!--</li>-->
         <!--<li class="side_visited"><a href="javascript:void(0)"> <span-->
-                <!--class="glyphicon glyphicon-headphones"></span>用户管理<span class="glyphicon glyphicon-menu-down"></span></a>-->
-            <!--<ul class="nav nav-sidebar side_visited_ul" style="display: none">-->
-                <!--<li><a href="">添加用户</a></li>-->
-                <!--<li><a href="">删除用户</a></li>-->
-                <!--<li><a href="">修改用户</a></li>-->
+        <!--class="glyphicon glyphicon-headphones"></span>用户管理<span class="glyphicon glyphicon-menu-down"></span></a>-->
+        <!--<ul class="nav nav-sidebar side_visited_ul" style="display: none">-->
+        <!--<li><a href="">添加用户</a></li>-->
+        <!--<li><a href="">删除用户</a></li>-->
+        <!--<li><a href="">修改用户</a></li>-->
 
-            <!--</ul>-->
+        <!--</ul>-->
         <!--</li>-->
         <!--<li class="side_visited"><a href="#"> <span class="glyphicon glyphicon-th-large"></span>角色管理<span class="glyphicon glyphicon-menu-down"></span></a>-->
-            <!--<ul class="nav nav-sidebar side_visited_ul" style="display: none">-->
-                <!--<li><a href="">添加角色</a></li>-->
-                <!--<li><a href="">删除删除</a></li>-->
-                <!--<li><a href="">修改角色</a></li>-->
+        <!--<ul class="nav nav-sidebar side_visited_ul" style="display: none">-->
+        <!--<li><a href="">添加角色</a></li>-->
+        <!--<li><a href="">删除删除</a></li>-->
+        <!--<li><a href="">修改角色</a></li>-->
 
-            <!--</ul>-->
+        <!--</ul>-->
         <!--</li>-->
         <!--<li class="side_visited"><a href="#"><span class="glyphicon glyphicon-comment"></span>评论管理</a></li>-->
         <!--<li class="side_visited"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>积分管理</a></li>-->

@@ -1,4 +1,10 @@
 /* 导航 */
+.activeTwo{
+    background-color: #87c1f3 !important;
+}
+.activeTwo:hover{
+    background-color: #87c1f3 !important;
+}
 .navbar-inverse {
     background-color: #348fde;
     padding-right: 30px;

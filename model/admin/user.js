@@ -4,26 +4,30 @@ let sequelize = require('../../util/mysqlDB');
 
 const DataTypes = Sequelize.DataTypes;
 module.exports = sequelize.define('user', {
-    id : {
-        type: DataTypes.TINYINT,
-        primaryKey: true,
+        id: {
+            type: DataTypes.TINYINT,
+            primaryKey: true,
 
+        },
+        user_name: {
+            type: DataTypes.STRING
+
+        },
+        password: {
+            type: DataTypes.STRING
+
+        },
+        role_id: {
+            type: DataTypes.TINYINT,
+        },
+        state: {
+            type: DataTypes.TINYINT
+
+        }
     },
-    user_name: {
-        type: DataTypes.STRING
+    {
 
-    },
-    password: {
-        type: DataTypes.STRING
-
-    },
-    state: {
-        type: DataTypes.TINYINT
-
-    }},
-   {
-       tableName:'user',
-       timestamps:false,
-       freezeTableName:true
-   }
+        timestamps: false,
+        freezeTableName: true
+    }
 );

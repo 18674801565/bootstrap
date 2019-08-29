@@ -3,8 +3,8 @@ const bodyParser = require("body-parser")
 const sessions = require("express-session")
 const domain = require('domain');
 const path = require('path');
-// session相关,将session存储到mongodb
-const MongoStore = require('connect-mongo')(sessions);
+// // session相关,将session存储到mongodb
+// const MongoStore = require('connect-mongo')(sessions);
 //express应用对象
 const app = express()
 
@@ -31,7 +31,7 @@ app.engine('html', require('express-art-template'))
 
 
 //挂载托管静态资源
-app.use('/static',express.static("./static"))
+app.use('/static',express.static(path.join(__dirname,'static')))
 
 //挂载请求体模块bodyParser
 // parse application/x-www-form-urlencoded
@@ -45,11 +45,11 @@ app.use(sessions({
     secret: 'mandb',
     resave: true,
     saveUninitialized: true,
-    store: new MongoStore({
-        url: 'mongodb://localhost:27017/mandb',
-        touchAfter: 24 * 3600   // 通过这样做，设置touchAfter:24 * 3600，您在24小时内只更新一次会话，不管有多少请求(除了在会话数据上更改某些内容的除外)
-
-    })
+    // store: new MongoStore({
+    //     url: 'mongodb://localhost:27017/mandb',
+    //     touchAfter: 24 * 3600   // 通过这样做，设置touchAfter:24 * 3600，您在24小时内只更新一次会话，不管有多少请求(除了在会话数据上更改某些内容的除外)
+    //
+    // })
 }))
 
 //跨域
@@ -64,7 +64,8 @@ app.use((req, res, next) => {
     // next抛出的异常在这里被捕获,触发此事件
     reqDomain.on('error', e => {
         // ... 这里统一处理错误，比如渲染或跳转到404，500页面
-        res.redirect("/error")
+        let data ={code:500,msg:e}
+        res.render("/admin/common/error",data)
     });
 
     return reqDomain.run(next);
@@ -75,6 +76,8 @@ app.use(require("./router/admin/index"))
 app.use(require("./router/admin/login"))
 app.use(require("./router/admin/commend"))
 app.use(require("./router/admin/admin"))
+app.use(require("./router/admin/role"))
+app.use(require("./router/admin/user"))
 app.use(require("./router/admin/error"))
 
 let port = 3000;

@@ -20,18 +20,19 @@
 
   <!-- Custom styles for this template -->
   <link href="../../static/css/dashboard.css" rel="stylesheet">
-  <link href="../../static/common/common.css" rel="stylesheet">
-
+  <link href="../../static/common/css/common.css" rel="stylesheet">
+    <link href="../../static/common/css/toastr.min.css" rel="stylesheet" />
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
   <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
   <script src="../../static/assets/js/ie-emulation-modes-warning.js"></script>
-  <script src="../../static/common/template-web.js"></script>
+  <script src="../../static/common/js/template-web.js"></script>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -50,12 +51,12 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-home"></span></span></a></li>
+        <li><a href="javascript:void(0)" onclick="goto_index()"><span class="glyphicon glyphicon-home"></span></span></a></li>
         <li><a href="/admin/leave"><span class="glyphicon glyphicon glyphicon-share"></span></span></a></li>
 
       </ul>
       <form class="navbar-form navbar-right">
-        <input type="text" class="form-control" placeholder="Search...">
+        <input type="text" class="form-control" placeholder="搜索...">
       </form>
     </div>
   </div>
@@ -74,13 +75,13 @@
           <%
           for(let m of $data.menus){
           %>
-          <li><a href="javascript:void(0)" title="<%=m.menu_href%>" class="side_visited">
+          <li><a href="javascript:;" title="<%=m.menu_href%>" class="side_visited">
             <span class="glyphicon <%=m.icon%>"></span><%=m.desc%><span class="glyphicon glyphicon-menu-down"></span></a>
             <ul class="nav nav-sidebar side_visited_ul" style="display: none">
               <%
               for(let mm of m.sonMenu){
               %>
-              <li><a class="side_visited_two" href="javascript:void(0)" title="<%=mm.menu_href%>"><%=mm.desc%></a></li>
+              <li><a class="side_visited_two" href="javascript:;" title="<%=mm.menu_href%>"><%=mm.desc%></a></li>
               <%
               }
               %>
@@ -97,92 +98,29 @@
         <h1 class="page-header">功能</h1>
 
         <div class="row placeholders">
-          <div class="col-xs-6 col-sm-3 placeholder">
+          <div class="col-xs-6 col-sm-6 placeholder">
+            <canvas id="doughnut-graph"></canvas>
+            <h4>用户vip比例</h4>
+          </div>
+          <div class="col-xs-6 col-sm-6 placeholder">
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
               height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-            <h4>Label</h4>
-            <span class="text-muted">Something else</span>
+            <h4>待定</h4>
+
           </div>
-          <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
-              height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-            <h4>Label</h4>
-            <span class="text-muted">Something else</span>
-          </div>
-          <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
-              height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-            <h4>Label</h4>
-            <span class="text-muted">Something else</span>
-          </div>
-          <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
-              height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-            <h4>Label</h4>
-            <span class="text-muted">Something else</span>
-          </div>
+
         </div>
 
-        <h2 class="sub-header">Section title</h2>
+        <h2 class="sub-header">接口使用情况</h2>
         <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1,001</td>
-                <td>Lorem</td>
-                <td>ipsum</td>
-                <td>dolor</td>
-                <td>sit</td>
-              </tr>
-              <tr>
-                <td>1,002</td>
-                <td>amet</td>
-                <td>consectetur</td>
-                <td>adipiscing</td>
-                <td>elit</td>
-              </tr>
-              <tr>
-                <td>1,003</td>
-                <td>Integer</td>
-                <td>nec</td>
-                <td>odio</td>
-                <td>Praesent</td>
-              </tr>
-              <tr>
-                <td>1,003</td>
-                <td>libero</td>
-                <td>Sed</td>
-                <td>cursus</td>
-                <td>ante</td>
-              </tr>
-              <tr>
-                <td>1,004</td>
-                <td>dapibus</td>
-                <td>diam</td>
-                <td>Sed</td>
-                <td>nisi</td>
-              </tr>
-              <tr>
-                <td>1,005</td>
-                <td>Nulla</td>
-                <td>quis</td>
-                <td>sem</td>
-                <td>at</td>
-              </tr>
+          <div class="row">
+              <div class="col-md-2 col-xs-2"></div>
+            <div class="col-md-8 col-xs-8">
+              <canvas id="bars-graph"></canvas>
+            </div>
 
+          </div>
 
-
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
@@ -191,20 +129,92 @@
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+
   <script>
     window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
   </script>
-  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
   <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
   <script src="../../static/assets/js/vendor/holder.min.js"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="../../static/assets/js/ie10-viewport-bug-workaround.js"></script>
-  <script src="../../static/common/common.js"> </script>
-<!--提示框插件-->
-<script src="../../static/common/toastr.min.js"></script>
-<link href="../../static/common/toastr.min.css" rel="stylesheet" />
+  <script src="../../static/common/js/common.js"> </script>
+  <script src="../../static/common/js/Chart.js"></script>
 <script>
+  function showChart(){
+      // 接口调用量矩形报表
+  <%
+      let n = [];
+      for(let num of $data.handleNum.handleName){
+          n.push(num)
+      }
+
+  %>
+      let barChartData = {
+          labels:[<% for(let num of $data.handleNum.handleName){
+      %>
+          "<%= num%>",
+      <%
+      }%>]
+  ,
+      datasets: [
+          {
+              label: "接口使用次数",
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255,99,132,1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1,
+              data: <%= $data.handleNum.count%>,
+  }
+  ]
+  };
+
+      let ctx = document.getElementById("bars-graph").getContext("2d");
+      let BarChart = new Chart(ctx, {
+          type: 'bar',
+          data: barChartData,
+          responsive : true
+      });
+      // vip扇形报表
+      let colerData = ["#FF6384","#FF6CD1","#110DFF","#A85BFF","#21CEFF","#21FF19","#FF7423","#FF061A","#FFFBC6"]
+      let colerDataHover = ["#BC4A61","#D45DAF","#110C8F","#7446B6","#20A6D4","#21FF19","#1ED619","#D00618","#DCD8A5"]
+      var pieData = {
+          labels: [
+          <% for(let num of $data.vipNum.vipName){
+      %>
+          "<%= num%>",
+      <%
+      }%>
+  ],
+      datasets: [
+          {
+              data: <%= $data.vipNum.count%>,
+          backgroundColor:  colerData
+          ,
+          hoverBackgroundColor: colerDataHover
+  }]
+  };
+
+      var ctx_doughnut = document.getElementById("doughnut-graph").getContext("2d");
+      var PieChart = new Chart(ctx_doughnut,{
+          type: 'doughnut',
+          data: pieData,
+          responsive : true
+      });
+  }
 
   //更新密码
     function updatePsw(){
@@ -259,7 +269,7 @@
                         location.href = "/admin/login"
                     },3000)
                 },
-                error:function(){
+                error:function(data){
                     toastr.info(data.msg)
                 }
             })
@@ -268,6 +278,9 @@
     }
 
 $(function(){
+
+    //显示报表
+    showChart()
     //浏览器回退后。强制刷新
     if (window.name == "hasLoad") {
         location.reload();
@@ -290,12 +303,20 @@ $(function(){
         "hideMethod": "fadeOut" //消失时的动画方式
     };
     //侧栏点击请求数据，并显示
-    $(".side_visited,.side_visited_two").click(function(){
+    $(".side_visited_two").click(function(){
+        //添加选中样式
+        $(".side_visited_two").removeClass("activeTwo")
+        $(this).addClass('activeTwo')
         //等到请求地址
         let req_href = $(this).attr("title");
         if(req_href==''||req_href=="null"||req_href==undefined){
 
            return false
+        }
+        if(req_href=='javascript:void(0)'){
+
+            toastr.info('该功能未开放！')
+            return false
         }
         //请求
         $.post({
@@ -307,8 +328,8 @@ $(function(){
                 $("#res_body").append(data)
                 updatePsw()
             },
-            error:function(){
-
+            error:function(data){
+                toastr.info(data.msg)
             }
         })
     })
@@ -316,8 +337,45 @@ $(function(){
 
 
 })
+          //go to 首页
+function goto_index(){
 
+    let data = `
+    <h1 class="page-header">功能</h1>
+
+    <div class="row placeholders">
+        <div class="col-xs-6 col-sm-6 placeholder">
+            <canvas id="doughnut-graph"></canvas>
+            <h4>用户vip比例</h4>
+        </div>
+        <div class="col-xs-6 col-sm-6 placeholder">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200"
+                 height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+            <h4>待定</h4>
+
+        </div>
+
+    </div>
+
+    <h2 class="sub-header">接口使用情况</h2>
+    <div class="table-responsive">
+        <div class="row">
+        <div class="col-md-2 col-xs-2"></div>
+            <div class="col-md-8">
+                <canvas id="bars-graph"></canvas>
+            </div>
+        </div>
+
+    </div>`;
+            $("#res_body").empty()
+            $("#res_body").append(data)
+    //显示报表
+    showChart()
+
+    }
 </script>
+<!--提示框插件-->
+<script src="../../static/common/js/toastr.min.js"></script>
 </body>
 
 </html>

@@ -1,172 +1,210 @@
 <!DOCTYPE html>
-    <html lang="zh-CN">
-    
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <link rel="icon" href="../../favicon.ico">
-    
-      <title>Dashboard Template for Bootstrap</title>
-    
-      <!-- Bootstrap core CSS -->
-      <link href="../../static/css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    
-      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-      <link href="../../static/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    
-      <!-- Custom styles for this template -->
-      <link href="../../static/css/dashboard.css" rel="stylesheet">
-      <link href="../../static/common/common.css" rel="stylesheet">
-      <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-      <!--[if lt IE 9]><script src="static/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-      <script src="../../static/assets/js/ie-emulation-modes-warning.js"></script>
-    
-      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-      <!--[if lt IE 9]>
-          <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-          <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+<html lang="zh-CN">
 
-    </head>
-    
-    <body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-    <%include("./common/side")%>
-    
-      <div class="container-fluid">
-        <div class="row">
+    <title>Dashboard Template for Bootstrap</title>
 
-            <%include("./common/side")%>
-          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 col-lg-10 main">
+    <!-- Bootstrap core CSS -->
+    <link href="../../static/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../static/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../../static/css/dashboard.css" rel="stylesheet">
+    <link href="../../static/common/css/common.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]>
+    <script src="static/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../static/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<%include("./common/side")%>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <%include("./common/side")%>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 col-lg-10 main">
             <h1 class="page-header">功能</h1>
-    
+
             <form action="javascript:;" class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="classify" class="col-sm-2 control-label">分类名:</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="classify" value="">
-                        </div>
+                <div class="form-group">
+                    <label for="classify" class="col-sm-2 control-label">分类名:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="classify" value="">
                     </div>
-                    <div class="form-group">
-                        <label for="title" class="col-sm-2 control-label">标题:</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="title" value="">
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">标题:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="title" value="">
                     </div>
-                    <div class="form-group">
-                        <label for="keyword" class="col-sm-2 control-label">关键字:</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="keyword" value="">
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="keyword" class="col-sm-2 control-label">关键字:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="keyword" value="">
                     </div>
-                    <div class="form-group">
-                        <label for="cont" class="col-sm-2 control-label">内容描述:</label>
-                        <div class="col-sm-8">
-                            <script id="cont" name="content" type="text/plain" style="width: 100%;height: 600px;"></script>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="clickNum" class="col-sm-2 control-label">点击量:</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="clickNum" value="0">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="sort" class="col-sm-2 control-label">排序:</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="sort" value="0">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label"></label>
-                        <div class="col-sm-8">
-                            <button class="btn btn-info" id="submit">提交</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-    
-        
-          </div>
-        </div>
-      </div>
-    
-      <!-- Bootstrap core JavaScript
-        ================================================== -->
-      <!-- Placed at the end of the document so the pages load faster -->
-      <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-      <script>
-        window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
-      </script>
-      <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-      <script src="../../static/assets/js/vendor/holder.min.js"></script>
-      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-      <script src="../../static/assets/js/ie10-viewport-bug-workaround.js"></script>
-      <script src="../../static/common/common.js"> </script>
-      <script src="../../static/assets/ueditor/ueditor.config.js"></script>
-      <script src="../../static/assets/ueditor/ueditor.all.min.js"></script>
-      <script src="../../static/assets/ueditor/lang/zh-cn/zh-cn.js"></script>
-      
-      <script>
-            $(function () {
-                var content = "";
-                var caseId = 1;
-                var ue = UE.getEditor('cont', {
-                    serverUrl: '/ueditor/ue'
-                });
-        
-            ue.ready(function () {
-                ue.setContent(content);
-                var isRequesting = false;
-                $('#submit').on('click',function () {
-                    if (isRequesting){
-                        return;
-                    }
-                    var type = $('#classify').val().trim();
-                    var title = $('#title').val().trim();
-                    var keyword = $('#keyword').val().trim();
-                    var ueContent = ue.getContent();
-                    var sort = $('#sort').val() || 0;
-                    isRequesting = true;
-                    var url = '/api/case/create';
-        
-                    var data = {
-                        type: type,
-                        title: title,
-                        keyword: keyword,
-                        content: ueContent,
-                        sort: sort
-                    };
-        
-                    if (caseId){
-                        data.id = caseId;
-                        url = '/api/case/update';
-                    }
-        
-                    $.post(url,data).then(function (res) {
-                        var def = $.Deferred();
-                        return res.code == 200 ? def.resolve(res) : def.reject(res.msg);
-                    }).done(function (res) {
-                        alert(res.msg);
-                        if (!caseId){
-                            location.href = '/admin/case?id ='+res.caseId;
-                        }
-                        location.href = '/admin/case_list';
-                    }).fail(function (msg) {
-                        alert(typeof msg === 'string'? msg :'服务器出现错误');
-                    }).always(function () {
-                        isRequesting = false;
-                    });
-                })
-            });
-        
-            });
-        </script>
-    </body>
-    
-    </html>
+                </div>
+                <div class="form-group">
+                    <label for="cont" class="col-sm-2 control-label">内容描述:</label>
+                    <div class="col-sm-8">
+                        <script id="cont" name="content" type="text/plain" style="width: 100%;height: 600px;"></script>
+                        <
+                        /div>
+                        < /div>
+                        < div
+                        class
+                        = "form-group" >
+                            < label
+                        for= "clickNum" class
+                        = "col-sm-2 control-label" > 点击量
+                        :<
+                        /label>
+                        < div
+                        class
+                        = "col-sm-4" >
+                            < input
+                        type = "text"
+                        class
+                        = "form-control"
+                        id = "clickNum"
+                        value = "0" >
+                            < /div>
+                            < /div>
+                            < div
+                        class
+                        = "form-group" >
+                            < label
+                        for= "sort" class
+                        = "col-sm-2 control-label" > 排序
+                        :<
+                        /label>
+                        < div
+                        class
+                        = "col-sm-4" >
+                            < input
+                        type = "text"
+                        class
+                        = "form-control"
+                        id = "sort"
+                        value = "0" >
+                            < /div>
+                            < /div>
+                            < div
+                        class
+                        = "form-group" >
+                            < label
+                        class
+                        = "col-sm-2 control-label" > < /label>
+                            < div
+                        class
+                        = "col-sm-8" >
+                            < button
+                        class
+                        = "btn btn-info"
+                        id = "submit" > 提交 < /button>
+                            < /div>
+                            < /div>
+                            < /form>
+                            < /div>
+
+
+                            < /div>
+                            < /div>
+                            < /div>
+
+                            <!-- Bootstrap core JavaScript
+                              ================================================== -->
+                            <!-- Placed at the end of the document so the pages load faster -->
+                            < script
+                        src = "https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js" ></script>
+                        <script>
+                            window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+                        </script>
+                        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                        <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+                        <script src="../../static/assets/js/vendor/holder.min.js"></script>
+                        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+                        <script src="../../static/assets/js/ie10-viewport-bug-workaround.js"></script>
+                        <script src="../../static/common/js/common.js"></script>
+                        <script src="../../static/assets/ueditor/ueditor.config.js"></script>
+                        <script src="../../static/assets/ueditor/ueditor.all.min.js"></script>
+                        <script src="../../static/assets/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+                        <script>
+                            $(function () {
+                                var content = "";
+                                var caseId = 1;
+                                var ue = UE.getEditor('cont', {
+                                    serverUrl: '/ueditor/ue'
+                                });
+
+                                ue.ready(function () {
+                                    ue.setContent(content);
+                                    var isRequesting = false;
+                                    $('#submit').on('click', function () {
+                                        if (isRequesting) {
+                                            return;
+                                        }
+                                        var type = $('#classify').val().trim();
+                                        var title = $('#title').val().trim();
+                                        var keyword = $('#keyword').val().trim();
+                                        var ueContent = ue.getContent();
+                                        var sort = $('#sort').val() || 0;
+                                        isRequesting = true;
+                                        var url = '/api/case/create';
+
+                                        var data = {
+                                            type: type,
+                                            title: title,
+                                            keyword: keyword,
+                                            content: ueContent,
+                                            sort: sort
+                                        };
+
+                                        if (caseId) {
+                                            data.id = caseId;
+                                            url = '/api/case/update';
+                                        }
+
+                                        $.post(url, data).then(function (res) {
+                                            var def = $.Deferred();
+                                            return res.code == 200 ? def.resolve(res) : def.reject(res.msg);
+                                        }).done(function (res) {
+                                            alert(res.msg);
+                                            if (!caseId) {
+                                                location.href = '/admin/case?id =' + res.caseId;
+                                            }
+                                            location.href = '/admin/case_list';
+                                        }).fail(function (msg) {
+                                            alert(typeof msg === 'string' ? msg : '服务器出现错误');
+                                        }).always(function () {
+                                            isRequesting = false;
+                                        });
+                                    })
+                                });
+
+                            });
+                        </script>
+</body>
+
+</html>
