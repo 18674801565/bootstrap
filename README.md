@@ -24,7 +24,7 @@ const MongoStore = require('connect-mongo')(sessions);
 + 启动报模块未引入等错请删除mode_modules,在node下运行npm i
 
 # 后台管理
-version-0.0.3
++ version-0.0.3
 
 # 添加功能
 + 加入列表
