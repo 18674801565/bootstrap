@@ -4,7 +4,7 @@ const sequelize = require('../../util/mysqlDB');
 
 router.get('/admin', async (req, res) => {
     console.info(req.session)
-    if (!req.session || !req.session.isLogin) {
+    if (!req.session.isLogin) {
         return res.render('admin/login');
     }
     //响应index页面

@@ -1,9 +1,11 @@
 const  express = require("express")
 const bodyParser = require("body-parser")
 const sessions = require("express-session")
+const sequelize = require('./util/mysqlDB');
 const domain = require('domain');
 const path = require('path');
-// // session相关,将session存储到mongodb
+const URL = require("url");
+//  session相关,将session存储到mongodb
 // const MongoStore = require('connect-mongo')(sessions);
 //express应用对象
 const app = express()
@@ -15,8 +17,7 @@ const template = require("art-template")
 template.defaults.extname = '.html'
 //缓存
 template.defaults.cache = true
-// //分页
-// template.defaults.imports.pagination = utils.pagination;
+
 //去掉art语法，主要是防止和vue冲突
 template.defaults.rules = [template.defaults.rules[0]]
 
@@ -72,6 +73,34 @@ app.use((req, res, next) => {
 });
 
 //挂载路由
+//权限判断
+app.use("/",function(req,res,next){
+
+    if (req.session.isLogin==undefined) {
+        next()
+    }else if(req.session.isLogin){
+        let currentUrl = URL.parse(req.url,true).pathname;
+        if (req.session.permission != undefined) {
+            let permission = req.session.permission;
+           // console.log(currentUrl)
+            let isPre = false
+            for (let ph of permission.href) {
+             //   console.log(`${ph}`)
+                if (`${ph}` == `${currentUrl}`) {
+                   // console.log('成功判断权限')
+                    isPre = true
+                }
+            }
+            if(!isPre){
+                return res.json({code: 500, msg: '权限不足！'})
+            }
+            next()
+        }
+    }else{
+        next()
+    }
+})
+
 app.use(require("./router/admin/index"))
 app.use(require("./router/admin/login"))
 app.use(require("./router/admin/commend"))

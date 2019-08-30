@@ -1,6 +1,6 @@
 //定义一个express路由对象
 const router = require("express").Router()
-const connect = require("../../util/mysqlDB")
+const sequelize = require('../../util/mysqlDB');
 const userModel = require("../../model/admin/user")
 const crypto = require("crypto")
 
@@ -20,10 +20,27 @@ router.post('/admin/toLogin', async (req, res) => {
     //根据username，password查询
     let user = await userModel.findOne({where: {user_name, password}});
     //   console.log(user)
+    //权限判断
+
     if (user != null) {
+        if(user.dataValues.role_id >2){
+            return res.json({code: 510, msg: '权限不足,不能登录后台!'})
+        }
+        //读取权限
+        let permission = {}
+        permission.href = []
+        await sequelize.query(`select rp.id,rp.role_id,p.permission_href,p.permission_name from permissions p ,role_permission rp 
+where p.id =rp.permissions_id and rp.role_id =${user.dataValues.role_id} GROUP BY rp.id`,
+            {type: sequelize.QueryTypes.SELECT}).then(function (results) {
+            for(let p of results){
+                permission.href.push(p.permission_href)
+            }
+        })
+
         //设置session
         req.session.isLogin = true;
         req.session.user = user.dataValues;
+        req.session.permission = permission;
         //   console.log(req.session)
         return res.json({code: 200, msg: '登录成功!', href: `/admin/index`});
     }

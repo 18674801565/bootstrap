@@ -42,7 +42,7 @@ router.post('/admin/alterRole', async (req, res) => {
     //修改角色
     await sequelize.query(`update role set role='${roleName}',state=${state} where  id=${roleId}`,
         {type: sequelize.QueryTypes.UPDATE}).then(function (results) {
-        console.log("results:" + results)
+      //  console.log("results:" + results)
         if (results[1] >= 0) {
             data.role = results;
             data.msg = "删除成功！";
@@ -77,7 +77,7 @@ router.post('/admin/addRole', async (req, res) => {
         {type: sequelize.QueryTypes.SELECT}).then(function (results) {
 
         if (results.length>0) {
-            console.log(results)
+         //   console.log(results)
             isExist = true;
         }
     }).catch(
@@ -91,7 +91,7 @@ router.post('/admin/addRole', async (req, res) => {
     //添加角色
     await sequelize.query(`insert into role(role,state) values('${roleName}',${state})`,
         {type: sequelize.QueryTypes.INSERT}).then(function (results) {
-        console.log("results:" + results)
+    //    console.log("results:" + results)
         if (results[1] >= 0) {
             data.role = results;
             data.msg = "插入成功！";
@@ -108,7 +108,7 @@ router.post('/admin/addRole', async (req, res) => {
 function deleteRoleById(id, res) {
     sequelize.query(`delete from role where id=${id}`,
         {type: sequelize.QueryTypes.DELETE}).then(function (results) {
-        console.log("results:" + results)
+       // console.log("results:" + results)
         if (results == undefined) {
             data.role = results;
             data.msg = "删除成功！";

@@ -53,7 +53,7 @@ router.post('/admin/alterUser', async (req, res) => {
     let idMark = parseInt(req.body.idMark);
     let userName = req.body.userName;
     let state = parseInt(req.body.stateName);
-    console.log(userId + "-" + userName + "-" + password + "-" + idMark + "-" + state)
+ //   console.log(userId + "-" + userName + "-" + password + "-" + idMark + "-" + state)
     if (userId == null || userName == null || state == null || idMark == null || password == null) {
         return res.json({code: 500, msg: "数据不完整！"})
     }
@@ -66,7 +66,7 @@ router.post('/admin/alterUser', async (req, res) => {
     //修改用户
     await sequelize.query(`update user set user_name='${userName}',password='${password}',role_id='${idMark}',state=${state} where  id=${userId}`,
         {type: sequelize.QueryTypes.UPDATE}).then(function (results) {
-        console.log("results:" + results)
+     //   console.log("results:" + results)
         if (results[1] >= 0) {
             data.User = results;
             data.msg = "删除成功！";
@@ -108,7 +108,7 @@ router.post('/admin/addUser', async (req, res) => {
         {type: sequelize.QueryTypes.SELECT}).then(function (results) {
 
         if (results.length>0) {
-            console.log(results)
+         //   console.log(results)
             isExist = true;
         }
     }).catch(
@@ -171,7 +171,7 @@ router.post("/admin/user/paging", async (req, res) => {
         data.users = result;
         data.msg = "查询成功！";
     }
-    console.log(data.count)
+ //   console.log(data.count)
     data.users = result;
     res.render("admin/paging", data)
 })
@@ -179,7 +179,7 @@ router.post("/admin/user/paging", async (req, res) => {
 function deleteUserById(id, res) {
     sequelize.query(`delete from user where id=${id}`,
         {type: sequelize.QueryTypes.DELETE}).then(function (results) {
-        console.log("results:" + results)
+     //   console.log("results:" + results)
         if (results == undefined) {
             data.User = results;
             data.msg = "删除成功！";
