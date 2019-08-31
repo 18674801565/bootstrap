@@ -24,13 +24,13 @@ router.post('/admin/toLogin', async (req, res) => {
 
     if (user != null) {
         if(user.dataValues.role_id >2){
-            return res.json({code: 510, msg: '权限不足,不能登录后台!'})
+            return res.json({code: 500, msg: '权限不足,不能登录后台!'})
         }
         //读取权限
         let permission = {}
         permission.href = []
-        await sequelize.query(`select rp.id,rp.role_id,p.permission_href,p.permission_name from permissions p ,role_permission rp 
-where p.id =rp.permissions_id and rp.role_id =${user.dataValues.role_id} GROUP BY rp.id`,
+        await sequelize.query(`select rp.id,rp.role_id,p.permission_href,p.permission_name from role as r, permissions as p ,role_permission as rp 
+where p.id =rp.permissions_id and r.id = rp.role_id and rp.role_id =${user.dataValues.role_id} and r.state = 1 GROUP BY rp.id`,
             {type: sequelize.QueryTypes.SELECT}).then(function (results) {
             for(let p of results){
                 permission.href.push(p.permission_href)

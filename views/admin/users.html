@@ -56,11 +56,7 @@
 
     <script src="../../static/common/js/jqPaginator.min.js" type="text/javascript"></script>
     <link href="../../static/common/css/myPage.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript">
-        function loadData(num) {
-            $("#PageCount").val();
-        }
-    </script>
+
 
     <form id="form1" runat="server">
         <div>
@@ -74,62 +70,7 @@
             <!--设置最多显示的页码数 可以手动设置 默认为7-->
             <input type="hidden" id="visiblePages" runat="server" value="5"/>
         </div>
-        <script>
-            function exeData(num, type) {
-                loadData(num);
-                loadpage();
-            }
 
-            function loadpage() {
-                var myPageCount = Math.ceil($("#PageCount").val());
-                var myPageSize = parseInt($("#PageSize").val());
-                var countindex = myPageCount % myPageSize > 0 ? (myPageCount / myPageSize) + 1 : (myPageCount / myPageSize);
-                $("#countindex").val(countindex);
-
-                $.jqPaginator('#pagination', {
-                    totalPages: parseInt($("#countindex").val()),
-                    visiblePages: parseInt($("#visiblePages").val()),
-                    currentPage: 1,
-                    first: '<li class="first"><a href="javascript:;" onclick="toPage(1)">首页</a></li>',
-                    prev: '<li class="prev"><a href="javascript:;" onclick="toPage({{page}})"><i class="arrow arrow2"></i>上一页</a></li>',
-                    next: '<li class="next"><a href="javascript:;" onclick="toPage({{page}})">下一页<i class="arrow arrow3"></i></a></li>',
-                    last: '<li class="last"><a href="javascript:;" onclick="toPage({{page}})">末页</a></li>',
-                    page: '<li class="page"><a href="javascript:;" onclick="toPage({{page}})">{{page}}</a></li>',
-                    onPageChange: function (num, type) {
-                        if (type == "change") {
-                            exeData(num, type);
-                        }
-                    }
-                });
-            }
-
-            $(function () {
-                loadData(1);
-                loadpage();
-            });
-
-            function toPage(index) {
-                let ind = parseInt(index);
-                $.post({
-                    url: "/admin/user/paging",
-                    datType: 'text',
-                    async: false,
-                    data: {
-                        currentPage: ind,
-                        countPage: parseInt($("#countindex").val()),
-                        pageSize: parseInt($("#PageSize").val())
-                    },
-                    success: function (data) {
-                        //渲染分页数据
-                        $("#table-striped").empty()
-                        $("#table-striped").append(data)
-                    },
-                    error: function () {
-
-                    }
-                })
-            }
-        </script>
     </form>
 
 </div>
@@ -233,6 +174,65 @@
     </div><!-- /.modal -->
 </div>
 <script>
+    function loadData(num) {
+        $("#PageCount").val();
+    }
+    function exeData(num, type) {
+        loadData(num);
+        loadpage();
+    }
+
+    function loadpage() {
+        var myPageCount = Math.ceil($("#PageCount").val());
+        var myPageSize = parseInt($("#PageSize").val());
+        var countindex = myPageCount % myPageSize > 0 ? (myPageCount / myPageSize) + 1 : (myPageCount / myPageSize);
+        $("#countindex").val(countindex);
+
+        $.jqPaginator('#pagination', {
+            totalPages: parseInt($("#countindex").val()),
+            visiblePages: parseInt($("#visiblePages").val()),
+            currentPage: 1,
+            first: '<li class="first"><a href="javascript:;" onclick="toPage(1)">首页</a></li>',
+            prev: '<li class="prev"><a href="javascript:;" onclick="toPage({{page}})"><i class="arrow arrow2"></i>上一页</a></li>',
+            next: '<li class="next"><a href="javascript:;" onclick="toPage({{page}})">下一页<i class="arrow arrow3"></i></a></li>',
+            last: '<li class="last"><a href="javascript:;" onclick="toPage({{page}})">末页</a></li>',
+            page: '<li class="page"><a href="javascript:;" onclick="toPage({{page}})">{{page}}</a></li>',
+            onPageChange: function (num, type) {
+                if (type == "change") {
+                    exeData(num, type);
+                }
+            }
+        });
+    }
+
+    $(function () {
+        loadData(1);
+        loadpage();
+    });
+
+    function toPage(index) {
+        let ind = parseInt(index);
+        $.post({
+            url: "/admin/user/paging",
+            datType: 'text',
+            async: false,
+            data: {
+                currentPage: ind,
+                countPage: parseInt($("#countindex").val()),
+                pageSize: parseInt($("#PageSize").val())
+            },
+            success: function (data) {
+                //渲染分页数据
+                $("#table-striped").empty()
+                $("#table-striped").append(data)
+            },
+            error: function () {
+
+            }
+        })
+    }
+</script>
+<script>
     //显示当前修改的角色
     function alterUser(user) {
         $("#myModalLabel").text("修改")
@@ -266,8 +266,6 @@
                         stateName: stateName
                     },
                     success: function (data) {
-                        $('#myModal').css('display', 'none')
-                        $('.modal-backdrop').css('display', 'none')
                         //刷新列表
                         $.post({
                             url: '/admin/userList',
@@ -285,13 +283,13 @@
                         toastr.success(data.msg);
                     },
                     error: function (data) {
-                        $('#myModal').css('display', 'none')
-                        $('.modal-backdrop').css('display', 'none')
                         toastr.error(data.msg);
 
                     }
                 })
-
+                $('#myModal').css('display', 'none')
+                $('.modal-backdrop').remove()
+                $("body").removeClass("modal-open");
             } else {
                 toastr.info('请填写完整！');
             }
@@ -316,8 +314,7 @@
                     userId: userId,
                 },
                 success: function (data) {
-                    $('#myModal').css('display', 'none')
-                    $('.modal-backdrop').css('display', 'none')
+
                     //刷新列表
                     $.post({
                         url: '/admin/userList',
@@ -336,11 +333,12 @@
                     toastr.success(data.msg);
                 },
                 error: function (data) {
-                    $('#myModal').css('display', 'none')
-                    $('.modal-backdrop').css('display', 'none')
 
                 }
             })
+            $('#myModal').css('display', 'none')
+            $('.modal-backdrop').remove()
+            $("body").removeClass("modal-open");
             return false
 
         })
@@ -373,8 +371,7 @@
                         stateName: stateName
                     },
                     success: function (data) {
-                        $('#myModal').css('display', 'none')
-                        $('.modal-backdrop').css('display', 'none')
+
                         //刷新列表
                         $.post({
                             url: '/admin/userList',
@@ -392,13 +389,12 @@
                         toastr.success(data.msg);
                     },
                     error: function (data) {
-                        $('#myModal').css('display', 'none')
-                        $('.modal-backdrop').css('display', 'none')
-                        toastr.error(data.msg);
 
                     }
                 })
-
+                $('#myModal').css('display', 'none')
+                $('.modal-backdrop').remove()
+                $("body").removeClass("modal-open");
             } else {
                 toastr.info('请填写完整！');
             }

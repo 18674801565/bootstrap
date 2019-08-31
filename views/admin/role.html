@@ -126,8 +126,6 @@
                         stateName: stateName
                     },
                     success: function (data) {
-                        $('#myModal').css('display', 'none')
-                        $('.modal-backdrop').css('display', 'none')
                         //刷新列表
                         $.post({
                             url: '/admin/role',
@@ -145,8 +143,6 @@
                         toastr.success(data.msg);
                     },
                     error: function (data) {
-                        $('#myModal').css('display', 'none')
-                        $('.modal-backdrop').css('display', 'none')
                         toastr.error(data.msg);
 
                     }
@@ -156,6 +152,9 @@
                 toastr.info('请填写完整！');
             }
         })
+        $('#myModal').css('display', 'none')
+        $('.modal-backdrop').remove()
+        $("body").removeClass("modal-open");
         return false
     }
 
@@ -177,8 +176,6 @@
                     roleId: roleId,
                 },
                 success: function (data) {
-                    $('#myModal').css('display', 'none')
-                    $('.modal-backdrop').css('display', 'none')
                     //刷新列表
                     $.post({
                         url: '/admin/role',
@@ -197,14 +194,14 @@
                     toastr.success(data.msg);
                 },
                 error: function (data) {
-                    $('#myModal').css('display', 'none')
-                    $('.modal-backdrop').css('display', 'none')
-
                 }
             })
             return false
 
         })
+        $('#myModal').css('display', 'none')
+        $('.modal-backdrop').remove()
+        $("body").removeClass("modal-open");
         return false
     }
 
@@ -225,13 +222,10 @@
                     dataType: 'json',
                     async: false,
                     data: {
-
                         roleName: roleName,
                         stateName: stateName
                     },
                     success: function (data) {
-                        $('#myModal').css('display', 'none')
-                        $('.modal-backdrop').css('display', 'none')
                         //刷新列表
                         $.post({
                             url: '/admin/role',
@@ -249,8 +243,6 @@
                         toastr.success(data.msg);
                     },
                     error: function (data) {
-                        $('#myModal').css('display', 'none')
-                        $('.modal-backdrop').css('display', 'none')
                         toastr.error(data.msg);
 
                     }
@@ -260,6 +252,9 @@
                 toastr.info('请填写完整！');
             }
         })
+        $('#myModal').css('display', 'none')
+        $('.modal-backdrop').remove()
+        $("body").removeClass("modal-open");
         return false
     }
 

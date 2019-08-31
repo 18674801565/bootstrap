@@ -82,12 +82,12 @@ app.use("/",function(req,res,next){
         let currentUrl = URL.parse(req.url,true).pathname;
         if (req.session.permission != undefined) {
             let permission = req.session.permission;
-           // console.log(currentUrl)
+            console.log(currentUrl)
             let isPre = false
             for (let ph of permission.href) {
-             //   console.log(`${ph}`)
+                console.log(`${ph}`)
                 if (`${ph}` == `${currentUrl}`) {
-                   // console.log('成功判断权限')
+                    console.log('成功判断权限')
                     isPre = true
                 }
             }
